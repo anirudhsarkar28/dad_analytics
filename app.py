@@ -32,7 +32,7 @@ def calculate_score(gaming, tv, nap, work):
         nap * 3
     )
 
-    score = 50 + productive - distractions
+    score = 10 + productive - distractions
 
     return max(0, min(100, round(score)))
 
