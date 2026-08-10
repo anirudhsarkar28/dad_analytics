@@ -32,7 +32,7 @@ def calculate_score(gaming, tv, nap, work):
         nap * 3
     )
 
-    score = 10 + productive - distractions
+    score = 50 + productive - distractions
 
     return max(0, min(100, round(score)))
 
@@ -88,18 +88,6 @@ A balanced day with some evidence of productivity.
 
 **Recommendation**
 Attempt to outperform the television tomorrow.
-"""
-    elif score <= 10:
-        return """
-### Audit Failure
-
-Management was unable to verify any meaningful activity.
-
-The employee appears to have spent the day
-optimizing leisure operations.
-
-Recommendation:
-Try doing literally anything tomorrow.
 """
 
     else:
@@ -192,32 +180,7 @@ if st.session_state.analyzed:
     )
 
     rank = get_rank(score)
-    total_activity = (
-        gaming_hours +
-        tv_hours +
-        nap_hours +
-        work_hours
-    )
 
-    if total_activity == 0:
-
-        st.error("🚨 Audit Failure")
-
-        st.markdown("""
-        ## Too Lazy To Make The Input?
-
-        Management requested activity data.
-
-        No activity data was provided.
-
-        After careful review, we have concluded
-        that the employee was too lazy to even
-        complete the audit form.
-
-        Please move at least one slider.
-        """)
-
-        st.stop()
     # KPI Cards
 
     k1, k2, k3, k4 = st.columns(4)
