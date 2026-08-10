@@ -24,14 +24,17 @@ if "achievement" not in st.session_state:
 
 def calculate_score(gaming, tv, nap, work):
 
-    total = gaming + tv + nap + work
+    productive = work * 10
 
-    if total == 0:
-        return 0
+    distractions = (
+        gaming * 6 +
+        tv * 5 +
+        nap * 3
+    )
 
-    score = (work / total) * 100
+    score = 10 + productive - distractions
 
-    return round(score)
+    return max(0, min(100, round(score)))
 
 
 def get_rank(score):
@@ -85,6 +88,18 @@ A balanced day with some evidence of productivity.
 
 **Recommendation**
 Attempt to outperform the television tomorrow.
+"""
+    elif score <= 10:
+        return """
+### Audit Failure
+
+Management was unable to verify any meaningful activity.
+
+The employee appears to have spent the day
+optimizing leisure operations.
+
+Recommendation:
+Try doing literally anything tomorrow.
 """
 
     else:
